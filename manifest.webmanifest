@@ -1,0 +1,17 @@
+{
+  "name": "Veil Paste",
+  "short_name": "Veil Paste",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#111320",
+  "theme_color": "#aaa1ff",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

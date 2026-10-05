@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Replace private details before sharing text with an AI assistant."
+    />
+    <meta name="theme-color" content="#aaa1ff" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Veil Paste — Mete Alp Karvan</title>
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="veil">
+    <a class="skip" href="#main"
+      ><span data-tr="İçeriğe geç" data-en="Skip to content"
+        >İçeriğe geç</span
+      ></a
+    >
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="./"
+          ><img src="assets/icon.svg" alt="" />Veil Paste</a
+        >
+        <nav class="nav" aria-label="App">
+          <a href="https://github.com/metealpkarvan/veil-paste">GitHub ↗</a
+          ><button id="language" type="button" class="quiet">EN</button>
+        </nav>
+      </header>
+      <main id="main">
+        <section class="intro">
+          <div>
+            <div class="eyebrow">KEEP THE MEANING · LEAVE THE IDENTIFIERS</div>
+            <h1>Veil Paste</h1>
+            <p>
+              <span
+                data-tr="AI ile paylaşmadan önce özel bilgileri yerel olarak maskele."
+                data-en="Replace private details before sharing text with an AI assistant."
+                >AI ile paylaşmadan önce özel bilgileri yerel olarak
+                maskele.</span
+              >
+            </p>
+          </div>
+          <span class="pill"
+            ><span
+              data-tr="Hesapsız · cihazında çalışır"
+              data-en="No account · runs on your device"
+              >Hesapsız · cihazında çalışır</span
+            ></span
+          >
+        </section>
+        <div class="grid">
+          <section class="panel">
+            <div class="bar">
+              <h2>
+                <span
+                  data-tr="01 / Paylaşmadan önce"
+                  data-en="01 / Before sharing"
+                  >01 / Paylaşmadan önce</span
+                >
+              </h2>
+              <button id="demo" class="quiet">
+                <span data-tr="Örneği dene" data-en="Try a sample"
+                  >Örneği dene</span
+                >
+              </button>
+            </div>
+            <div class="field">
+              <label for="source"
+                ><span data-tr="Orijinal metin" data-en="Original text"
+                  >Orijinal metin</span
+                ></label
+              ><textarea
+                id="source"
+                maxlength="60000"
+                spellcheck="false"
+              ></textarea>
+            </div>
+            <div class="row">
+              <label class="check"
+                ><input id="emails" type="checkbox" checked /><span
+                  data-tr="E-posta adresleri"
+                  data-en="Email addresses"
+                  >E-posta adresleri</span
+                ></label
+              ><label class="check"
+                ><input id="phones" type="checkbox" checked /><span
+                  data-tr="Telefon benzeri alanlar"
+                  data-en="Phone-like fields"
+                  >Telefon benzeri alanlar</span
+                ></label
+              ><label class="check"
+                ><input id="keys" type="checkbox" checked /><span
+                  data-tr="Anahtarlar ve sır atamaları"
+                  data-en="Keys and secret assignments"
+                  >Anahtarlar ve sır atamaları</span
+                ></label
+              ><label class="check"
+                ><input id="ibans" type="checkbox" checked />IBAN</label
+              >
+            </div>
+            <div class="field">
+              <label for="custom"
+                ><span
+                  data-tr="Özel terimler: her satıra bir ad veya ifade"
+                  data-en="Custom terms: one name or phrase per line"
+                  >Özel terimler: her satıra bir ad veya ifade</span
+                ></label
+              ><textarea
+                id="custom"
+                maxlength="10000"
+                placeholder="Acme Labs&#10;Deniz Yılmaz"
+              ></textarea>
+              <p class="hint">
+                <span
+                  data-tr="Özel terimler büyük/küçük harfe duyarlıdır. Otomatik tarama her sırrı bulamaz; çıktıyı incele."
+                  data-en="Custom terms are case-sensitive. Detection cannot find every secret; review the result."
+                  >Özel terimler büyük/küçük harfe duyarlıdır. Otomatik tarama
+                  her sırrı bulamaz; çıktıyı incele.</span
+                >
+              </p>
+            </div>
+            <button id="mask" class="primary">
+              <span data-tr="Metni maskele" data-en="Mask text"
+                >Metni maskele</span
+              >
+            </button>
+          </section>
+          <section class="panel">
+            <div class="bar">
+              <h2>
+                <span
+                  data-tr="02 / Paylaşılacak sürüm"
+                  data-en="02 / Sharing version"
+                  >02 / Paylaşılacak sürüm</span
+                >
+              </h2>
+              <span class="seal">NO UPLOAD</span>
+            </div>
+            <div class="notice">
+              <span
+                data-tr="Aynı değer, aynı takma ad. Eşleştirme listesi sunucuya veya yerel depoya yazılmaz."
+                data-en="Same value, same alias. The mapping is never sent to a server or written to local storage."
+                >Aynı değer, aynı takma ad. Eşleştirme listesi sunucuya veya
+                yerel depoya yazılmaz.</span
+              >
+            </div>
+            <div class="metrics">
+              <div class="metric">
+                <strong id="occurrences">0</strong
+                ><span data-tr="Maskelenen alan" data-en="Masked occurrences"
+                  >Maskelenen alan</span
+                >
+              </div>
+              <div class="metric">
+                <strong id="aliases">0</strong
+                ><span data-tr="Benzersiz takma ad" data-en="Unique aliases"
+                  >Benzersiz takma ad</span
+                >
+              </div>
+            </div>
+            <pre id="masked" class="output" tabindex="0"></pre>
+            <p id="summary" class="hint"></p>
+            <div class="actions">
+              <button id="copy" class="primary" disabled>
+                <span data-tr="Maskeli metni kopyala" data-en="Copy masked text"
+                  >Maskeli metni kopyala</span
+                ></button
+              ><button id="download" disabled>
+                <span data-tr="TXT indir" data-en="Download TXT"
+                  >TXT indir</span
+                >
+              </button>
+            </div>
+          </section>
+          <section class="panel wide">
+            <div class="bar">
+              <h2>
+                <span
+                  data-tr="03 / Yanıtı geri aç"
+                  data-en="03 / Restore the reply"
+                  >03 / Yanıtı geri aç</span
+                >
+              </h2>
+              <span class="tag"
+                ><span
+                  data-tr="Yalnızca bu oturumda"
+                  data-en="Only in this session"
+                  >Yalnızca bu oturumda</span
+                ></span
+              >
+            </div>
+            <div class="grid">
+              <div>
+                <label for="reply"
+                  ><span
+                    data-tr="AI yanıtını buraya yapıştır"
+                    data-en="Paste the AI reply here"
+                    >AI yanıtını buraya yapıştır</span
+                  ></label
+                ><textarea
+                  id="reply"
+                  maxlength="60000"
+                  spellcheck="false"
+                ></textarea
+                ><button id="restore">
+                  <span
+                    data-tr="Bilinen takma adları geri aç"
+                    data-en="Restore known aliases"
+                    >Bilinen takma adları geri aç</span
+                  >
+                </button>
+              </div>
+              <div>
+                <label for="restored"
+                  ><span data-tr="Geri açılmış yanıt" data-en="Restored reply"
+                    >Geri açılmış yanıt</span
+                  ></label
+                >
+                <pre id="restored" class="output" tabindex="0"></pre>
+                <button id="copy-restored">
+                  <span data-tr="Yanıtı kopyala" data-en="Copy reply"
+                    >Yanıtı kopyala</span
+                  >
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="toolbar">
+          <button id="clear" class="quiet danger">
+            <span
+              data-tr="Tüm oturum metnini temizle"
+              data-en="Clear all session text"
+              >Tüm oturum metnini temizle</span
+            ></button
+          ><span class="hint"
+            ><span
+              data-tr="Yenileme veya sekmeyi kapatma eşleştirmeleri kaybettirir."
+              data-en="Reloading or closing the tab discards the mapping."
+              >Yenileme veya sekmeyi kapatma eşleştirmeleri kaybettirir.</span
+            ></span
+          >
+        </div>
+      </main>
+      <footer class="footer">
+        <details>
+          <summary>
+            <span
+              data-tr="Nasıl çalışır? Gizlilik ve sınırlar"
+              data-en="How it works · privacy and limits"
+              >Nasıl çalışır? Gizlilik ve sınırlar</span
+            >
+          </summary>
+          <p>
+            <span
+              data-tr="Metin ve takma ad eşleştirmeleri yalnızca açık sekmenin belleğinde tutulur. Bu bir şifreleme veya tam veri sızıntısı önleme sistemi değildir. Sayılardan oluşan bazı alanlar yanlış eşleşebilir; adlar ve özel bilgiler için elle terim ekle. İndirme ve pano işlemleri yalnızca sen tıkladığında gerçekleşir."
+              data-en="Text and alias mappings live only in this open tab’s memory. This is not encryption or a complete data loss prevention system. Some numeric fields may be false positives; add names and private terms manually. Downloads and clipboard writes happen only when you click."
+              >Metin ve takma ad eşleştirmeleri yalnızca açık sekmenin
+              belleğinde tutulur. Bu bir şifreleme veya tam veri sızıntısı
+              önleme sistemi değildir. Sayılardan oluşan bazı alanlar yanlış
+              eşleşebilir; adlar ve özel bilgiler için elle terim ekle. İndirme
+              ve pano işlemleri yalnızca sen tıkladığında gerçekleşir.</span
+            >
+          </p>
+          <p>
+            <span
+              data-tr="Örnek veriler kurgusaldır. Bu bir X/Twitter entegrasyonu değildir. Araştırma kaynakları, tasarım gerekçeleri ve testler GitHub deposunda açıklanır."
+              data-en="Sample data is fictional. This is not an X/Twitter integration. Research sources, design decisions and tests are documented in the repository."
+              >Örnek veriler kurgusaldır. Bu bir X/Twitter entegrasyonu
+              değildir. Araştırma kaynakları, tasarım gerekçeleri ve testler
+              GitHub deposunda açıklanır.</span
+            >
+          </p>
+          <a
+            href="https://github.com/metealpkarvan/veil-paste/blob/main/docs/RESEARCH.md"
+            ><span
+              data-tr="Araştırma notlarını oku"
+              data-en="Read the research notes"
+              >Araştırma notlarını oku</span
+            >
+            ↗</a
+          >
+        </details>
+        <div>© 2026 Mete Alp Karvan · MIT · v1.0.0</div>
+      </footer>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>
